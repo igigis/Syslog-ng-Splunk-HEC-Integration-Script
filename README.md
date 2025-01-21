@@ -74,7 +74,7 @@ git clone https://github.com/igigis/Syslog-ng-Splunk-HEC-Integration-Script.git
 cd Syslog-ng-Splunk-HEC-Integration-Script
 
 # Make executable
-chmod +x syslog-ng-splunk-hec-install.sh
+sudo chmod +x syslog-ng-splunk-hec-install.sh
 
 # Run script
 sudo ./syslog-ng-splunk-hec-install.sh
