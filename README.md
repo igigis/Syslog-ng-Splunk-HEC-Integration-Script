@@ -55,8 +55,8 @@ The script performs the following tasks:
 Clone the repository to your system:
 
 ```bash
-git clone https://github.com/yourusername/syslog-ng-splunk-setup.git
-cd syslog-ng-splunk-setup
+git clone https://github.com/yourusername/Syslog-ng-Splunk-HEC-Integration-Script.git
+cd Syslog-ng-Splunk-HEC-Integration-Script
 ```
 
 ### Step 2: Make the Script Executable
@@ -64,7 +64,7 @@ cd syslog-ng-splunk-setup
 Make the script executable:
 
 ```bash
-chmod +x setup_syslog_ng.sh
+chmod +x syslog-ng-splunk-hec-install.sh
 ```
 
 ### Step 3: Run the Script
@@ -72,7 +72,7 @@ chmod +x setup_syslog_ng.sh
 Run the script as root:
 
 ```bash
-sudo ./setup_syslog_ng.sh
+sudo ./syslog-ng-splunk-hec-install.sh
 ```
 
 ### Step 4: Provide Splunk HEC Details
@@ -101,7 +101,7 @@ After the script completes:
 Ensure you are executing the script with root privileges using sudo:
 
 ```bash
-sudo ./setup_syslog_ng.sh
+sudo ./syslog-ng-splunk-hec-install.sh
 ```
 
 ### Unsupported Package Manager
@@ -129,7 +129,9 @@ The script supports apt and yum. If you're using a different package manager, ma
    ```
 3. Review syslog-ng logs for errors:
    ```bash
-   tail -f /var/log/syslog
+   sudo tail -f /var/log/syslog
+   or
+   sudo tail -f /var/log/messages
    ```
 
 ### Configuration Validation Failed
@@ -137,7 +139,7 @@ The script supports apt and yum. If you're using a different package manager, ma
 If syslog-ng validation fails, the script may have encountered an issue during configuration generation. Re-run the script:
 
 ```bash
-sudo ./setup_syslog_ng.sh
+sudo ./syslog-ng-splunk-hec-install.sh
 ```
 
 ### Service Restart Issues
