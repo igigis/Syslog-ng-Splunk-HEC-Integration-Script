@@ -2,8 +2,6 @@
 
 This script automates the installation and configuration of `syslog-ng` to forward logs to a Splunk HTTP Event Collector (HEC) endpoint. It ensures that logs from your system are properly forwarded to Splunk for centralized monitoring and analysis.
 
----
-
 ## Description
 
 The script performs the following tasks:
@@ -37,24 +35,18 @@ The script performs the following tasks:
 8. **Completion Message**  
    - Provides a summary of the configuration, including the Splunk HEC URL.
 
----
-
 ## Features
 
-- Installs `syslog-ng` if not already present.
-- Backs up the existing `syslog-ng` configuration file.
-- Configures a Splunk HEC destination with user-provided URL and token.
-- Validates and applies the configuration.
-- Restarts the `syslog-ng` service.
-
----
+- Installs `syslog-ng` if not already present
+- Backs up the existing `syslog-ng` configuration file
+- Configures a Splunk HEC destination with user-provided URL and token
+- Validates and applies the configuration
+- Restarts the `syslog-ng` service
 
 ## Prerequisites
 
-- A Splunk HEC endpoint URL and a valid token.
-- Root or sudo privileges to run the script.
-
----
+- A Splunk HEC endpoint URL and a valid token
+- Root or sudo privileges to run the script
 
 ## Installation and Configuration Steps
 
@@ -65,84 +57,102 @@ Clone the repository to your system:
 ```bash
 git clone https://github.com/yourusername/syslog-ng-splunk-setup.git
 cd syslog-ng-splunk-setup
+```
 
-Step 2: Make the Script Executable
+### Step 2: Make the Script Executable
 
 Make the script executable:
 
+```bash
 chmod +x setup_syslog_ng.sh
+```
 
-Step 3: Run the Script
+### Step 3: Run the Script
 
 Run the script as root:
 
+```bash
 sudo ./setup_syslog_ng.sh
+```
 
-Step 4: Provide Splunk HEC Details
+### Step 4: Provide Splunk HEC Details
 
 When prompted by the script:
 
-    Enter the Splunk HEC URL (e.g., https://splunk.example.com:8088/services/collector).
-    Provide the Splunk HEC token.
+1. Enter the Splunk HEC URL (e.g., https://splunk.example.com:8088/services/collector)
+2. Provide the Splunk HEC token
 
 The script will validate your input, confirm the details with you, and apply the configuration.
-Step 5: Verify Configuration and Service
+
+### Step 5: Verify Configuration and Service
 
 After the script completes:
 
-    Confirm that syslog-ng is running:
+1. Confirm that syslog-ng is running:
+   ```bash
+   systemctl status syslog-ng
+   ```
+2. Check that logs are being forwarded to Splunk
 
-    systemctl status syslog-ng
+## Troubleshooting
 
-    Check that logs are being forwarded to Splunk.
-
-Troubleshooting
-Error: This Script Must Be Run as Root
+### Error: This Script Must Be Run as Root
 
 Ensure you are executing the script with root privileges using sudo:
 
+```bash
 sudo ./setup_syslog_ng.sh
+```
 
-Unsupported Package Manager
+### Unsupported Package Manager
 
-The script supports apt and yum. If you’re using a different package manager, manually install syslog-ng and rerun the script.
-Error: Syslog-ng Service Failed to Start
+The script supports apt and yum. If you're using a different package manager, manually install syslog-ng and rerun the script.
 
-    Check the system logs for detailed errors:
+### Error: Syslog-ng Service Failed to Start
 
-journalctl -u syslog-ng
+1. Check the system logs for detailed errors:
+   ```bash
+   journalctl -u syslog-ng
+   ```
 
-Validate the syslog-ng configuration:
+2. Validate the syslog-ng configuration:
+   ```bash
+   syslog-ng -s
+   ```
 
-    syslog-ng -s
+### Splunk Not Receiving Logs
 
-Splunk Not Receiving Logs
+1. Verify the Splunk HEC URL and token are correct
+2. Check for connectivity issues by testing the HEC endpoint:
+   ```bash
+   curl -k -X POST https://splunk.example.com:8088/services/collector -H "Authorization: Splunk <TOKEN>"
+   ```
+3. Review syslog-ng logs for errors:
+   ```bash
+   tail -f /var/log/syslog
+   ```
 
-    Verify the Splunk HEC URL and token are correct.
-    Check for connectivity issues by testing the HEC endpoint:
-
-curl -k -X POST https://splunk.example.com:8088/services/collector -H "Authorization: Splunk <TOKEN>"
-
-Review syslog-ng logs for errors:
-
-    tail -f /var/log/syslog
-
-Configuration Validation Failed
+### Configuration Validation Failed
 
 If syslog-ng validation fails, the script may have encountered an issue during configuration generation. Re-run the script:
 
+```bash
 sudo ./setup_syslog_ng.sh
+```
 
-Service Restart Issues
+### Service Restart Issues
 
 If the service fails to restart, manually stop and start syslog-ng:
 
+```bash
 systemctl stop syslog-ng
 systemctl start syslog-ng
+```
 
-License
+## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
-Contributing
+
+## Contributing
 
 Feel free to open issues or submit pull requests for enhancements or bug fixes.
