@@ -1,6 +1,6 @@
 # Syslog-ng Splunk HEC Integration Script
 
-This script automates the installation and configuration of `syslog-ng` to forward logs to a Splunk HTTP Event Collector (HEC) endpoint. It ensures that logs from your system are properly forwarded to Splunk HEC for centralized monitoring and analysis.
+This script automates the installation and configuration of `syslog-ng` to forward logs to a Splunk HTTP Event Collector (HEC) endpoint. It ensures that logs from your system are properly forwarded to Splunk for centralized monitoring and analysis. The script is fully compatible with Huntress's Generic HEC source, allowing seamless integration with Huntress SIEM.
 
 ## Description
 
@@ -37,6 +37,7 @@ The script performs the following tasks:
 
 ## Features
 
+- Compatible with both Splunk and Huntress's Generic HEC source
 - Installs `syslog-ng` if not already present
 - Backs up the existing `syslog-ng` configuration file
 - Configures a Splunk HEC destination with user-provided URL and token
@@ -56,7 +57,10 @@ Clone the repository to your system:
 
 ```bash
 git clone https://github.com/yourusername/Syslog-ng-Splunk-HEC-Integration-Script.git
+
 cd Syslog-ng-Splunk-HEC-Integration-Script
+
+
 ```
 
 ### Step 2: Make the Script Executable
@@ -139,7 +143,7 @@ The script supports apt and yum. If you're using a different package manager, ma
 If syslog-ng validation fails, the script may have encountered an issue during configuration generation. Re-run the script:
 
 ```bash
-sudo ./syslog-ng-splunk-hec-install.sh
+sudo ./setup_syslog_ng.sh
 ```
 
 ### Service Restart Issues
