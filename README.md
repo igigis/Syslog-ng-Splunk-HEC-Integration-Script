@@ -68,16 +68,16 @@ The script streamlines log management by automating the following tasks:
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/syslog-ng-splunk-setup.git
+git clone https://github.com/igigis/Syslog-ng-Splunk-HEC-Integration-Script.git
 
 # Navigate to directory
-cd syslog-ng-splunk-setup
+cd Syslog-ng-Splunk-HEC-Integration-Script
 
 # Make executable
-chmod +x setup_syslog_ng.sh
+chmod +x syslog-ng-splunk-hec-install.sh
 
 # Run script
-sudo ./setup_syslog_ng.sh
+sudo ./syslog-ng-splunk-hec-install.sh
 ```
 
 ## 📖 Detailed Installation Guide
@@ -87,8 +87,10 @@ sudo ./setup_syslog_ng.sh
 Clone the repository to your system:
 
 ```bash
-git clone https://github.com/yourusername/syslog-ng-splunk-setup.git
-cd syslog-ng-splunk-setup
+git clone https://github.com/igigis/Syslog-ng-Splunk-HEC-Integration-Script.git
+cd Syslog-ng-Splunk-HEC-Integration-Script
+
+
 ```
 
 ### Step 2: Make the Script Executable
@@ -96,7 +98,7 @@ cd syslog-ng-splunk-setup
 Make the script executable:
 
 ```bash
-chmod +x setup_syslog_ng.sh
+chmod +x syslog-ng-splunk-hec-install.sh
 ```
 
 ### Step 3: Run the Script
@@ -104,7 +106,7 @@ chmod +x setup_syslog_ng.sh
 Run the script as root:
 
 ```bash
-sudo ./setup_syslog_ng.sh
+sudo ./syslog-ng-splunk-hec-install.sh
 ```
 
 ### Step 4: Configure HEC Details
@@ -124,7 +126,9 @@ Verify the setup:
 systemctl status syslog-ng
 
 # Verify log forwarding
-tail -f /var/log/syslog
+sudo tail -f /var/log/syslog
+or
+sudo tail -f /var/log/messages
 ```
 
 ## 🔍 Troubleshooting
@@ -133,7 +137,7 @@ tail -f /var/log/syslog
 
 #### Permission Errors
 ```bash
-sudo ./setup_syslog_ng.sh
+sudo ./syslog-ng-splunk-hec-install.sh
 ```
 
 #### Package Manager Issues
