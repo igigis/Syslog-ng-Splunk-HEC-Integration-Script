@@ -7,7 +7,7 @@
 
 > 🚀 Automate syslog-ng configuration for Splunk HEC and Huntress log forwarding in minutes!
 
-This script automates the installation and configuration of `syslog-ng` to forward logs to a Splunk HTTP Event Collector (HEC) endpoint. It ensures that logs from your system are properly forwarded to Splunk for centralized monitoring and analysis. The script is fully compatible with Huntress's Generic HEC source, allowing seamless integration with Huntress log collection infrastructure.
+This script automates the installation and configuration of `syslog-ng` to forward logs to a Splunk HTTP Event Collector (HEC) endpoint. It ensures that logs from your system are properly forwarded to Splunk for centralized monitoring and analysis. The script is fully compatible with Huntress's Generic HEC source, allowing seamless integration with Huntress SIEM.
 
 ## 📑 Table of Contents
 
