@@ -58,3 +58,8 @@ This ensures that logs from your system are properly forwarded to Splunk for cen
 ```bash
 git clone https://github.com/yourusername/syslog-ng-splunk-setup.git
 cd syslog-ng-splunk-setup
+
+#Step 2: Make the Script Executable
+
+chmod +x setup_syslog_ng.sh
+
