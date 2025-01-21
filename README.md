@@ -1,66 +1,94 @@
 # Syslog-ng Splunk HEC Integration Script
 
-This script automates the installation and configuration of `syslog-ng` to forward logs to a Splunk HTTP Event Collector (HEC) endpoint. It ensures that logs from your system are properly forwarded to Splunk for centralized monitoring and analysis. The script is fully compatible with Huntress's Generic HEC source, allowing seamless integration with Huntress SIEM.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Splunk Compatible](https://img.shields.io/badge/Splunk-Compatible-red.svg)]()
+[![Huntress Compatible](https://img.shields.io/badge/Huntress-Compatible-blue.svg)]()
+[![Syslog-ng](https://img.shields.io/badge/syslog--ng-Supported-green.svg)]()
 
-## Description
+> 🚀 Automate syslog-ng configuration for Splunk HEC and Huntress log forwarding in minutes!
 
-The script performs the following tasks:
+This script automates the installation and configuration of `syslog-ng` to forward logs to a Splunk HTTP Event Collector (HEC) endpoint. It ensures that logs from your system are properly forwarded to Splunk for centralized monitoring and analysis. The script is fully compatible with Huntress's Generic HEC source, allowing seamless integration with Huntress log collection infrastructure.
+
+## 📑 Table of Contents
+
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [Prerequisites](#prerequisites)
+- [Quick Start](#quick-start)
+- [Detailed Installation Guide](#detailed-installation-guide)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [License](#license)
+- [Support](#support)
+
+## 🎯 Overview
+
+The script streamlines log management by automating the following tasks:
 
 1. **Privilege Check**  
    Ensures the script is executed with root or sudo privileges.
 
-2. **Prompt for Splunk HEC Details**  
-   - Collects the Splunk HEC URL and token from the user.
-   - Validates the URL format and token length.
-   - Confirms the entered details with the user.
+2. **Splunk/Huntress HEC Configuration**  
+   - Collects and validates HEC URL and token
+   - Supports both Splunk and Huntress Generic HEC endpoints
+   - Validates configuration before deployment
 
-3. **Install Syslog-ng**  
-   - Checks if `syslog-ng` is already installed.
-   - If not, installs it using the appropriate package manager (`apt` for Debian/Ubuntu or `yum` for CentOS/Red Hat).
+3. **Automated Installation & Setup**  
+   - Smart detection of existing syslog-ng installation
+   - Automatic package manager detection (apt/yum)
+   - Configuration backup and safety checks
 
-4. **Backup Existing Configuration**  
-   - Creates a timestamped backup of the current `syslog-ng` configuration file, if it exists.
+## ✨ Key Features
 
-5. **Generate New Configuration**  
-   - Creates a new `syslog-ng` configuration file to forward logs to the Splunk HEC endpoint.
-   - Configures a failover destination to log files locally.
+- **Multi-Platform Support**
+  - Compatible with both Splunk and Huntress's Generic HEC source
+  - Supports Debian/Ubuntu (apt) and CentOS/RHEL (yum) systems
+  - Cross-platform configuration templates
 
-6. **Validate Configuration**  
-   - Runs `syslog-ng` syntax validation to ensure the new configuration is error-free.
+- **Robust Configuration Management**
+  - Automated syslog-ng installation
+  - Backup of existing configurations
+  - Failover logging capability
+  - Configuration validation
 
-7. **Restart Syslog-ng Service**  
-   - Restarts the `syslog-ng` service to apply the new configuration.
-   - Verifies the service is running correctly.
+- **Security & Reliability**
+  - Secure token handling
+  - URL validation and sanitization
+  - Local backup logging
+  - Service health monitoring
 
-8. **Completion Message**  
-   - Provides a summary of the configuration, including the Splunk HEC URL.
+## 🔧 Prerequisites
 
-## Features
+- Root or sudo privileges
+- Splunk HEC endpoint URL and valid token
+- Internet connectivity for package installation
+- Compatible Linux distribution (Debian/Ubuntu or CentOS/RHEL)
 
-- Compatible with both Splunk and Huntress's Generic HEC source
-- Installs `syslog-ng` if not already present
-- Backs up the existing `syslog-ng` configuration file
-- Configures a Splunk HEC destination with user-provided URL and token
-- Validates and applies the configuration
-- Restarts the `syslog-ng` service
+## 🚀 Quick Start
 
-## Prerequisites
+```bash
+# Clone repository
+git clone https://github.com/yourusername/syslog-ng-splunk-setup.git
 
-- A Splunk HEC endpoint URL and a valid token
-- Root or sudo privileges to run the script
+# Navigate to directory
+cd syslog-ng-splunk-setup
 
-## Installation and Configuration Steps
+# Make executable
+chmod +x setup_syslog_ng.sh
+
+# Run script
+sudo ./setup_syslog_ng.sh
+```
+
+## 📖 Detailed Installation Guide
 
 ### Step 1: Clone the Repository
 
 Clone the repository to your system:
 
 ```bash
-git clone https://github.com/yourusername/Syslog-ng-Splunk-HEC-Integration-Script.git
-
-cd Syslog-ng-Splunk-HEC-Integration-Script
-
-
+git clone https://github.com/yourusername/syslog-ng-splunk-setup.git
+cd syslog-ng-splunk-setup
 ```
 
 ### Step 2: Make the Script Executable
@@ -68,7 +96,7 @@ cd Syslog-ng-Splunk-HEC-Integration-Script
 Make the script executable:
 
 ```bash
-chmod +x syslog-ng-splunk-hec-install.sh
+chmod +x setup_syslog_ng.sh
 ```
 
 ### Step 3: Run the Script
@@ -76,89 +104,77 @@ chmod +x syslog-ng-splunk-hec-install.sh
 Run the script as root:
 
 ```bash
-sudo ./syslog-ng-splunk-hec-install.sh
+sudo ./setup_syslog_ng.sh
 ```
 
-### Step 4: Provide Splunk HEC Details
+### Step 4: Configure HEC Details
 
-When prompted by the script:
+When prompted:
 
-1. Enter the Splunk HEC URL (e.g., https://splunk.example.com:8088/services/collector)
-2. Provide the Splunk HEC token
+1. Enter the Splunk/Huntress HEC URL (e.g., https://splunk.example.com:8088/services/collector)
+2. Provide your HEC token
+3. Confirm the configuration details
 
-The script will validate your input, confirm the details with you, and apply the configuration.
+### Step 5: Verify Installation
 
-### Step 5: Verify Configuration and Service
-
-After the script completes:
-
-1. Confirm that syslog-ng is running:
-   ```bash
-   systemctl status syslog-ng
-   ```
-2. Check that logs are being forwarded to Splunk
-
-## Troubleshooting
-
-### Error: This Script Must Be Run as Root
-
-Ensure you are executing the script with root privileges using sudo:
+Verify the setup:
 
 ```bash
-sudo ./syslog-ng-splunk-hec-install.sh
+# Check service status
+systemctl status syslog-ng
+
+# Verify log forwarding
+tail -f /var/log/syslog
 ```
 
-### Unsupported Package Manager
+## 🔍 Troubleshooting
 
-The script supports apt and yum. If you're using a different package manager, manually install syslog-ng and rerun the script.
+### Common Issues and Solutions
 
-### Error: Syslog-ng Service Failed to Start
-
-1. Check the system logs for detailed errors:
-   ```bash
-   journalctl -u syslog-ng
-   ```
-
-2. Validate the syslog-ng configuration:
-   ```bash
-   syslog-ng -s
-   ```
-
-### Splunk Not Receiving Logs
-
-1. Verify the Splunk HEC URL and token are correct
-2. Check for connectivity issues by testing the HEC endpoint:
-   ```bash
-   curl -k -X POST https://splunk.example.com:8088/services/collector -H "Authorization: Splunk <TOKEN>"
-   ```
-3. Review syslog-ng logs for errors:
-   ```bash
-   sudo tail -f /var/log/syslog
-   or
-   sudo tail -f /var/log/messages
-   ```
-
-### Configuration Validation Failed
-
-If syslog-ng validation fails, the script may have encountered an issue during configuration generation. Re-run the script:
-
+#### Permission Errors
 ```bash
 sudo ./setup_syslog_ng.sh
 ```
 
-### Service Restart Issues
+#### Package Manager Issues
+- Script supports apt and yum
+- Manual installation option available for other package managers
 
-If the service fails to restart, manually stop and start syslog-ng:
-
+#### Service Start Failures
 ```bash
-systemctl stop syslog-ng
-systemctl start syslog-ng
+# Check logs
+journalctl -u syslog-ng
+
+# Validate config
+syslog-ng -s
 ```
 
-## License
+#### Connection Issues
+```bash
+# Test HEC endpoint
+curl -k -X POST https://splunk.example.com:8088/services/collector -H "Authorization: Splunk <TOKEN>"
+```
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+## 🤝 Contributing
 
-## Contributing
+We welcome contributions! Please feel free to:
 
-Feel free to open issues or submit pull requests for enhancements or bug fixes.
+1. Fork the repository
+2. Create a feature branch
+3. Submit a pull request
+
+For major changes, open an issue first to discuss proposed changes.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 💬 Support
+
+- Create an issue for bug reports
+- Submit feature requests via issues
+- Join our community discussions
+
+---
+
+**Keywords**: syslog-ng, Splunk, Huntress, HEC, log forwarding, log management, syslog configuration, system logging, log collection, security logging, SIEM integration, log automation, Linux logging, centralized logging, log shipping
