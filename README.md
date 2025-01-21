@@ -1,6 +1,6 @@
 # Syslog-ng Splunk HEC Integration Script
 
-This script automates the installation and configuration of `syslog-ng` to forward logs to a Splunk HTTP Event Collector (HEC) endpoint. It ensures that logs from your system are properly forwarded to Splunk for centralized monitoring and analysis.
+This script automates the installation and configuration of `syslog-ng` to forward logs to a Splunk HTTP Event Collector (HEC) endpoint. It ensures that logs from your system are properly forwarded to Splunk HEC for centralized monitoring and analysis.
 
 ## Description
 
