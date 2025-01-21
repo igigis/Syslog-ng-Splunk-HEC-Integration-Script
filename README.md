@@ -98,7 +98,7 @@ cd Syslog-ng-Splunk-HEC-Integration-Script
 Make the script executable:
 
 ```bash
-chmod +x syslog-ng-splunk-hec-install.sh
+sudo chmod +x syslog-ng-splunk-hec-install.sh
 ```
 
 ### Step 3: Run the Script
