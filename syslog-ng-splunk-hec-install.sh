@@ -104,6 +104,10 @@ source s_local {
     system();
     internal();
 };
+# Network source for UDP on port 514
+source s_network {
+    network(ip("0.0.0.0") transport("udp") port(514));
+};
 # Splunk HEC Destination
 destination d_splunk_hec {
     http(
@@ -140,6 +144,7 @@ destination d_backup {
 # Log Path
 log {
     source(s_local);
+    source(s_network);
     destination(d_splunk_hec);
     destination(d_backup);
     flags(flow-control);
