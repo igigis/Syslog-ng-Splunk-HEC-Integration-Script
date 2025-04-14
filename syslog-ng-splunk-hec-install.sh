@@ -71,7 +71,7 @@ install_syslog_ng() {
             apt-get update
             apt-get install -y syslog-ng
         elif command -v yum >/dev/null 2>&1; then
-            yum install -y syslog-ng
+            yum install -y syslog-ng syslog-ng-http
         else
             log "Error: Unsupported package manager"
             exit 1
